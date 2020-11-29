@@ -10,13 +10,13 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-// array with objects containing desired team members
+// array with objects for team members
 const teamMembers = [];
-// array with all members' IDs
+// array with member IDs
 const idArray = [];
 
-// array containing 12 questions for Manager, Engineers, and Interns, and a question whether to add another Team Member
-// questions are validated to meet required criteria
+// array questions and options for user to answer
+// questions include validators
 const questions = [
   {
     name: "name",
@@ -47,7 +47,7 @@ const questions = [
   },
   {
     name: "email",
-    message: "What is Manager's email?",
+    message: "What is the Manager's email?",
     type: "input",
     validate: (answer) => {
       const pass = answer.match(/\S+@\S+\.\S+/);
@@ -77,11 +77,7 @@ const questions = [
     name: "teamMember",
     message: "What type of team member would you like to add?",
     type: "list",
-    choices: [
-      "Engineer",
-      "Intern",
-      "I don't want to add any more team members",
-    ],
+    choices: ["Engineer", "Intern", "My team is complete!"],
   },
   {
     name: "name",
@@ -241,7 +237,7 @@ function addEngineer() {
     });
 }
 
-// function creates a new instance of Intern object based on user's answers; object will be added to teamMembers array
+// creates a new instance of Intern object based on user's answers; object will be added to teamMembers array
 // unique ID is added to idArray
 // user can choose to create another Team member
 function addIntern() {
